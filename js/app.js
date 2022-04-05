@@ -65,67 +65,76 @@ function main () {
 
 
     var form = document.querySelector('#form');
-    var cesarRadio = document.querySelector('#cesar');
-    var baseRadio = document.querySelector('#base');
+    var options = document.querySelector('#options');
     var chaveCesar = document.querySelector('#chave-cesar');
-    var sectionCesar = document.querySelector('#chave')
-    var submitCripto = document.querySelector('#submit');
-    var submitDecripto = document.querySelector('#submitDecripto');
-    var text = document.querySelector('#tradutor-text')
-    
+    var sectionCesar = document.querySelector('#chave');
+    var submit = document.querySelector('#submit');
+    var text = document.querySelector('#tradutor-text');
+    var optionDec = document.querySelector('#optionDec');
+    var optionCrip = document.querySelector('#optionCrip');
 
-    baseRadio.addEventListener('click', function() {
-        
-        sectionCesar.style.visibility = 'hidden';
-        
-    });
+    options.addEventListener('click', function() {
 
-    cesarRadio.addEventListener('click', function() {
-        
-        sectionCesar.style.visibility = 'visible';
+        if (options.value == 'base') {
+            sectionCesar.style.visibility = 'hidden';
 
-    });
-
-    submitCripto.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        if (text.value == '') {
-
-            text.placeholder = 'Digite um valor';
-
-        } else {
-
-            var cifrado = document.querySelector('#cifrado');
-
-            if (form.option.value == 'cesar') {
- 
-                cifrado.value = cesar(text.value, chaveCesar.value, 'encrypt');
-    
-            } else if (form.option.value == 'base') {
-    
-                cifrado.value = base(text.value, 'encrypt');
-            };
+        } else if (options.value == 'cesar') {
+            sectionCesar.style.visibility = 'visible';
         };
     });
 
-    submitDecripto.addEventListener('click', function(event) {
+
+    optionCrip.addEventListener('click', function () {
+        submit.innerText = 'Criptografar';
+    });
+
+
+    optionDec.addEventListener('click', function() {
+        submit.innerText = 'Descriptografar';
+    });
+
+
+    submit.addEventListener('click', function(event) {
         event.preventDefault();
 
-        if (text.value == '') {
+        if (submit.innerText == 'Criptografar') {
 
-            text.placeholder = 'Digite um valor';
+            if (text.value == '') {
 
-        } else {
-
-            var cifrado = document.querySelector('#cifrado');
-
-            if (form.option.value == 'cesar') {
-
-                cifrado.value = cesar(text.value, chaveCesar.value, 'decrypt' );
+                text.placeholder = 'Digite um valor';
     
-            } else if (form.option.value == 'base') {
+            } else {
     
-                cifrado.value = base(text.value, 'decrypt');
+                var cifrado = document.querySelector('#cifrado');
+    
+                if (form.options.value == 'cesar') {
+     
+                    cifrado.value = cesar(text.value, chaveCesar.value, 'encrypt');
+        
+                } else if (form.options.value == 'base') {
+        
+                    cifrado.value = base(text.value, 'encrypt');
+                };
+            };
+
+        } else if (submit.innerText == 'Descriptografar') {
+
+            if (text.value == '') {
+
+                text.placeholder = 'Digite um valor';
+    
+            } else {
+    
+                var cifrado = document.querySelector('#cifrado');
+    
+                if (form.options.value == 'cesar') {
+    
+                    cifrado.value = cesar(text.value, chaveCesar.value, 'decrypt' );
+        
+                } else if (form.options.value == 'base') {
+        
+                    cifrado.value = base(text.value, 'decrypt');
+                };
             };
         };
     });
