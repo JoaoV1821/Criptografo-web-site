@@ -1,66 +1,56 @@
-function main () {
+function main() {
 
+    // Base64
     function base(text, mode) {
-        var textLower = text.toLowerCase();
 
         if (mode == 'encrypt') {
 
-            return btoa(textLower);
+            return btoa(text);
 
-        } else {
+        } else if (mode == 'decrypt') {
 
-            return atob(textLower);
+            return atob(text);
         };
 
     };
 
+    // Cifra de César
     function cesar(text, chave, mode) {
 
-        var textLower = text.toLowerCase();
         var numberChave = parseInt(chave);
-        
+
         if (mode == 'encrypt') {
 
-            for (var i=0; i < textLower.length; i++) {
+            var letrasEncript = [];
 
-                var charCode = textLower.charCodeAt(i);
-                
-                if ((charCode + numberChave) > 122) {
-    
-                    charCode = 97;
-                    textLower = textLower.replace(textLower[i], String.fromCharCode(charCode));
-    
-                } else {
-    
-                    var criptChar = String.fromCharCode(charCode + numberChave);
-                    textLower = textLower.replace(textLower[i], criptChar);
-                };
-                
+            for (var i = 0; i < text.length; i++) {
+                var charCod = text[i].charCodeAt();
+                var charCript = String.fromCharCode(charCod + numberChave);
+
+                letrasEncript.push(charCript);
             };
-    
-            return textLower;
 
-        } else {
+            letrasEncript = letrasEncript.toString().replace(/,/g, '');
 
-            for (var i=0; i < textLower.length; i++) {
+            return letrasEncript;
 
-                var charCode = textLower.charCodeAt(i);
-    
-                if((charCode - numberChave) < 97) {
-    
-                    charCode = 122;
-                    textLower = textLower.replace(textLower[i], String.fromCharCode(charCode));
-    
-                } else {
-    
-                    var criptChar = String.fromCharCode(charCode - numberChave);
-                    textLower = textLower.replace(textLower[i], criptChar);
-                };
+        } else if (mode == 'decrypt') {
+
+            var letrasDecript = [];
+
+            for (var i = 0; i < text.length; i++) {
+                var charCod = text[i].charCodeAt();
+                var charDecript = String.fromCharCode(charCod - numberChave);
+
+                letrasDecript.push(charDecript);
             };
-    
-            return textLower;
+
+            letrasDecript = letrasDecript.toString().replace(/,/g, '');
+
+            return letrasDecript;
+
         };
-        
+
     };
 
 
@@ -73,7 +63,7 @@ function main () {
     var optionDec = document.querySelector('#optionDec');
     var optionCrip = document.querySelector('#optionCrip');
 
-    options.addEventListener('click', function() {
+    options.addEventListener('click', function () {
 
         if (options.value == 'base') {
             sectionCesar.style.visibility = 'hidden';
@@ -89,12 +79,12 @@ function main () {
     });
 
 
-    optionDec.addEventListener('click', function() {
+    optionDec.addEventListener('click', function () {
         submit.innerText = 'Descriptografar';
     });
 
 
-    submit.addEventListener('click', function(event) {
+    submit.addEventListener('click', function (event) {
         event.preventDefault();
 
         if (submit.innerText == 'Criptografar') {
@@ -102,17 +92,17 @@ function main () {
             if (text.value == '') {
 
                 text.placeholder = 'Digite um valor';
-    
+
             } else {
-    
+
                 var cifrado = document.querySelector('#cifrado');
-    
+
                 if (form.options.value == 'cesar') {
-     
+
                     cifrado.value = cesar(text.value, chaveCesar.value, 'encrypt');
-        
+
                 } else if (form.options.value == 'base') {
-        
+
                     cifrado.value = base(text.value, 'encrypt');
                 };
             };
@@ -122,17 +112,17 @@ function main () {
             if (text.value == '') {
 
                 text.placeholder = 'Digite um valor';
-    
+
             } else {
-    
+
                 var cifrado = document.querySelector('#cifrado');
-    
+
                 if (form.options.value == 'cesar') {
-    
-                    cifrado.value = cesar(text.value, chaveCesar.value, 'decrypt' );
-        
+
+                    cifrado.value = cesar(text.value, chaveCesar.value, 'decrypt');
+
                 } else if (form.options.value == 'base') {
-        
+
                     cifrado.value = base(text.value, 'decrypt');
                 };
             };
