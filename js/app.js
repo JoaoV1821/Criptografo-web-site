@@ -25,7 +25,16 @@ function main() {
 
             for (var i = 0; i < text.length; i++) {
                 var charCod = text[i].charCodeAt();
-                var charCript = String.fromCharCode(charCod + numberChave);
+
+                if (charCod >= 65 && charCod <= 90) {
+                    var charCript = String.fromCharCode(((charCod - 65 + numberChave) % 26) + 65);
+
+                  } else if (charCod >= 97 && charCod <= 122) {
+                    var charCript = String.fromCharCode(((charCod - 97 + numberChave) % 26) + 97);
+                  } else {
+                      var charCript = String.fromCharCode(charCod);
+                  }
+               
 
                 letrasEncript.push(charCript);
             };
@@ -41,7 +50,15 @@ function main() {
 
             for (var i = 0; i < text.length; i++) {
                 var charCod = text[i].charCodeAt();
-                var charDecript = String.fromCharCode(charCod - numberChave);
+
+                if (charCod >= 65 && charCod <= 90) {
+                    var charDecript = String.fromCharCode(((charCod - 65 - numberChave) % 26) + 65);
+                    
+                  } else if (charCod >= 97 && charCod <= 122) {
+                    var charDecript = String.fromCharCode(((charCod - 97 - numberChave) % 26) + 97);
+                  } else {
+                    var charDecript = String.fromCharCode(charCod);
+                  }
 
                 letrasDecript.push(charDecript);
                 console.log(charCod)
