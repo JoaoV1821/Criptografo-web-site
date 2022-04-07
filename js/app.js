@@ -38,15 +38,17 @@ function main() {
 
             var letrasDecript = [];
 
+
             for (var i = 0; i < text.length; i++) {
                 var charCod = text[i].charCodeAt();
                 var charDecript = String.fromCharCode(charCod - numberChave);
 
                 letrasDecript.push(charDecript);
+                console.log(charCod)
             };
 
             letrasDecript = letrasDecript.toString().replace(/,/g, '');
-
+            
             return letrasDecript;
 
         };

@@ -135,3 +135,17 @@
     cursor: pointer;
     margin-top: 15%;
 }
+
+.sobre-codificacao {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 50%;
+}
+
+.text-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
